@@ -1,0 +1,21 @@
+@description Functional bug preventing removal of exception writers.
+@author Laurent Declercq <l.declercq@nuxwin.com>
+@component core/gui
+@triggers service reload imscp-panel
+
+===================================================================
+--- gui/library/iMSCP/Exception/Handler.php	(date 1544262695000)
++++ gui/library/iMSCP/Exception/Handler.php	(date 1565077394695)
+@@ -67,7 +67,11 @@
+     public function removeWriter($className)
+     {
+         $className = (string)$className;
+-        unset($this->writers[$className]);
++
++        $this->writers = array_filter(
++            $this->writers, function($value) use($className) {
++            return $value !== $className;
++        });
+     }
+ 
+     /**
