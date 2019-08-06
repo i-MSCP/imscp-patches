@@ -1,2 +1,4 @@
 # imscp-patches
-Patches for i-MSCP core.
+
+This repository holds patches for critical and/or functional bugs of various
+i-MSCP components, including plugins.
